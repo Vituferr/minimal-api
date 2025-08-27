@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using minimalapi.infraestrutura.DB;
 
@@ -10,9 +11,11 @@ using minimalapi.infraestrutura.DB;
 namespace minimal_api.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    partial class DbContextoModelSnapshot : ModelSnapshot
+    [Migration("20250826172730_SeedAdministrador")]
+    partial class SeedAdministrador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace minimal_api.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("minimalapi.dominio.entidades.Administrador", b =>
+            modelBuilder.Entity("minimalapi.dominio.entidades.administrador", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -35,10 +38,12 @@ namespace minimal_api.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("perfil")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
 
                     b.Property<string>("senha")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
@@ -54,32 +59,6 @@ namespace minimal_api.Migrations
                             perfil = "admin",
                             senha = "123456"
                         });
-                });
-
-            modelBuilder.Entity("minimalapi.dominio.entidades.Veiculos", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<int>("ano")
-                        .HasMaxLength(25)
-                        .HasColumnType("int");
-
-                    b.Property<string>("marca")
-                        .HasMaxLength(25)
-                        .HasColumnType("varchar(25)");
-
-                    b.Property<string>("nome")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("veiculos");
                 });
 #pragma warning restore 612, 618
         }
