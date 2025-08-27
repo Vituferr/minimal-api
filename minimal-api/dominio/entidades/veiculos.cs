@@ -16,8 +16,7 @@ public class Veiculo
 
     [StringLength(50)]
     [Required]
-    public string? marca { get; set; }
-
+    public string? marca { get; set; } = null;
     [StringLength(10)]
     [Required]
     public string? ano { get; set; }
